@@ -21,6 +21,11 @@ export class CourseHomePage {
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
     this.course = navParams.get('course');
 
+    http.get(`https://ocw.mit.edu${this.course.href}/index.json`)
+      .subscribe(course => {
+        this.course = course.json();
+      });
+
     http.get(`https://ocw.mit.edu${this.course.href}/`)
       .subscribe(course => {
         let courseRaw = $(course.text()
@@ -32,8 +37,7 @@ export class CourseHomePage {
           .find('#course_inner_chp');
 
         this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('mit-src')}`;
-        this.course.description = $(inner).find('#description p')[0].innerText;
-
+        
         // Fetch sidebar links
         courseRaw
           .find('nav#course_nav > ul > li')

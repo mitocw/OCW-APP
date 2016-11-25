@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ course.num }}
+      {{ course.mcn }}
     </ion-title>
     <ion-buttons end>
       <button ion-button menuToggle icon-only>
@@ -35,8 +35,9 @@
     <img [src]="course.image"/>
     <ion-card-content>
       <ion-card-title>
-        {{ course.name }}
+        {{ course.title }}
       </ion-card-title>
+      <h2><b>{{ course.instructors }}</b></h2>
       <p>
         {{ course.description }}
       </p>
