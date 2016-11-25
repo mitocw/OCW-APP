@@ -11,7 +11,7 @@ page-department {
         }
       }
     }
-    &:nth-child(even) {
+    &:nth-child(odd) {
       background-color: map-get($colors, light);
     }
   }
