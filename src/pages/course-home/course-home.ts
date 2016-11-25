@@ -23,7 +23,7 @@ export class CourseHomePage {
 
     http.get(`https://ocw.mit.edu${this.course.href}/index.json`)
       .subscribe(course => {
-        this.course = course.json();
+        this.course = Object.assign(this.course, course.json());
       });
 
     http.get(`https://ocw.mit.edu${this.course.href}/`)
@@ -37,7 +37,7 @@ export class CourseHomePage {
           .find('#course_inner_chp');
 
         this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('mit-src')}`;
-        
+
         // Fetch sidebar links
         courseRaw
           .find('nav#course_nav > ul > li')
