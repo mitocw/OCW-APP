@@ -24,7 +24,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private http: Http, private sanitizer: DomSanitizer) {
     this.departmentsHome = http.get('https://ocw.mit.edu/courses/find-by-department/')
-      .map(data => $(data.text())
+      .map(data => $(data.text().replace(/src\=/g, 'mit-src='))
         .find('.deptList')
         .find('a')
         .map(a => {
@@ -34,8 +34,10 @@ export class HomePage {
           };
           http.get(`https://ocw.mit.edu${dp.href}/`)
           .subscribe(data => {
-            this.departmentRaw[dp.href] = data.text().replace(/(\s\s)|\n|\t/g,'');
-            this.departmentImage[dp.href] = sanitizer.bypassSecurityTrustStyle(`url('https://ocw.mit.edu${$(this.departmentRaw[dp.href].match(/\<main.*\/main>/)[0]).find('img').first().attr('src')}')`);
+            this.departmentRaw[dp.href] = data.text()
+              .replace(/(\s\s)|\n|\t/g,'') // jqlite has parsing issues without this
+              .replace(/src\=/g, 'mit-src='); // jqlite will attempt to load images when parsing the html
+            this.departmentImage[dp.href] = sanitizer.bypassSecurityTrustStyle(`url('https://ocw.mit.edu${$(this.departmentRaw[dp.href].match(/\<main.*\/main>/)[0]).find('img').first().attr('mit-src')}')`);
           });
           return dp;
         }));

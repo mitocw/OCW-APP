@@ -23,12 +23,15 @@ export class CourseHomePage {
 
     http.get(`https://ocw.mit.edu${this.course.href}/`)
       .subscribe(course => {
-        let courseRaw = $(course.text().replace(/(\s\s)|\n|\t/g,'').match(/\<body.*\/body\>/)[0]);
+        let courseRaw = $(course.text()
+          .replace(/(\s\s)|\n|\t/g,'')
+          .replace(/src\=/g, 'mit-src=') // jqlite will attempt to load images when parsing the html
+          .match(/\<body.*\/body\>/)[0]);
 
         let inner = courseRaw
           .find('#course_inner_chp');
 
-        this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('src')}`;
+        this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('mit-src')}`;
         this.course.description = $(inner).find('#description p')[0].innerText;
 
         // Fetch sidebar links

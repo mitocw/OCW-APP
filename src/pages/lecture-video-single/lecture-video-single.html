@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ course.num }} / Lecture
+      {{ course.num }} / {{ lecture.name }}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <ion-card>
     <ion-card-content>
       <ion-card-title>
-        Lecture Video Here
+        <iframe *ngIf="lecture.video" [src]="lecture.video" frameborder="0" allowfullscreen></iframe>
       </ion-card-title>
     </ion-card-content>
   </ion-card>

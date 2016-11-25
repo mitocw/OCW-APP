@@ -20,11 +20,14 @@ export class LectureVideosPage {
 
     http.get(`https://ocw.mit.edu${this.course.href}/lecture-videos/`)
       .subscribe(course => {
-        $(course.text().replace(/(\s\s)|\n|\t/g,'').match(/\<body.*\/body\>/)[0])
+        $(course.text()
+          .replace(/(\s\s)|\n|\t/g,'')
+          .replace(/src\=/g, 'mit-src=')
+          .match(/\<body.*\/body\>/)[0])
           .find('main#course_inner_media_gallery > .medialisting')
           .map(listing => {
             let newListing: any = {};
-            newListing.image = $(listing).find('img').attr('src');
+            newListing.image = $(listing).find('img').attr('mit-src');
             let link = $(listing).find('.medialink');
             newListing.href = link.attr('href');
             newListing.name = link[0].innerText;

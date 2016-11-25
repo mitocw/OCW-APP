@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import $ from 'jqlite';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { Http } from '@angular/http';
 
 @Component({
@@ -10,24 +11,26 @@ import { Http } from '@angular/http';
 export class LectureVideoSinglePage {
 
   public course: any;
-  public listings: any = [];
+  public lecture: any;
 
-  constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams) {
+  constructor(private http: Http, public navParams: NavParams, private sanitizer: DomSanitizer) {
     this.course = navParams.get('course');
-    //
-    // http.get(`https://ocw.mit.edu${this.course.href}/lecture-video-single/`)
-    //   .subscribe(course => {
-    //     $(course.text().replace(/(\s\s)|\n|\t/g,'').match(/\<body.*\/body\>/)[0])
-    //       .find('main#course_inner_media_gallery > .medialisting')
-    //       .map(listing => {
-    //         let newListing: any = {};
-    //         newListing.image = $(listing).find('img').attr('src');
-    //         let link = $(listing).find('.medialink');
-    //         newListing.href = link.attr('href');
-    //         newListing.name = link[0].innerText;
-    //         this.listings.push(newListing);
-    //       });
-    //   });
+    this.lecture = navParams.get('listing');
+
+
+    http.get(`https://ocw.mit.edu${this.lecture.href}/`)
+      .subscribe(lecture => {
+        let video = lecture.text()
+          .replace(/(\s\s)|\n|\t/g,'')
+          .replace(/src\=/g, 'mit-src=')
+          .match(/https\:\/\/www.youtube.com\/(v|embed)\/\w+/)[0];
+        if (video) {
+          video = video.replace('/v/', '/embed/');
+          this.lecture.video = sanitizer.bypassSecurityTrustResourceUrl(video);
+        } else {
+          this.lecture.video = false;
+        }
+      });
   }
 
 }
