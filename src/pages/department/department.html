@@ -19,7 +19,7 @@
         </div>
       </ion-item>
     </ion-item-group>
-    <ion-item-group>
+    <ion-item-group *ngIf="courses.Graduate.length > 0">
       <ion-item-divider color="primary">Graduate</ion-item-divider>
       <ion-item
         (click)="viewCourse(course)"
