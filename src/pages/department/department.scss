@@ -1,3 +1,19 @@
 page-department {
 
+  ion-item {
+    div {
+      display: flex;
+      span {
+        white-space: normal;
+        padding: 2px;
+        &:nth-child(1) {
+          font-weight: bold;
+        }
+      }
+    }
+    &:nth-child(even) {
+      background-color: map-get($colors, light);
+    }
+  }
+
 }

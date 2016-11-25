@@ -6,6 +6,27 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light">Undergraduate</ion-item-divider>
+      <ion-item
+        *ngFor="let course of courses.Undergraduate; let i = index">
+        <div>
+          <span>{{ course.num }}</span>
+          <span>{{ course.name }}</span>
+        </div>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light">Graduate</ion-item-divider>
+      <ion-item
+        *ngFor="let course of courses.Graduate; let i = index">
+        <div>
+          <span>{{ course.num }}</span>
+          <span>{{ course.name }}</span>
+        </div>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
 </ion-content>
