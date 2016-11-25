@@ -21,7 +21,9 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let nav of sidebar">
+      <ion-item
+        *ngFor="let nav of sidebar"
+        (click)="sidebarLink(nav.page)">
         {{nav.name}}
       </ion-item>
     </ion-list>

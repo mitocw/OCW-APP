@@ -3,6 +3,8 @@ import $ from 'jqlite';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 
+import { LectureVideosPage } from '../lecture-videos/lecture-videos';
+
 @Component({
   selector: 'page-course-home',
   templateUrl: 'course-home.html'
@@ -11,6 +13,10 @@ export class CourseHomePage {
 
   public course: any;
   public sidebar: any = [];
+
+  public sidebarPages: any = {
+    'lecture-videos': LectureVideosPage
+  };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
     this.course = navParams.get('course');
@@ -22,13 +28,25 @@ export class CourseHomePage {
           .map(li => {
             let first = $(li.firstChild);
             if (first[0].localName == 'a') {
-              this.sidebar.push({
+              let navItem: any = {
                 name: first[0].innerText.trim(),
-                href: first.attr('href')
-              });
+                href: first.attr('href'),
+              };
+              for (let k of Object.keys(this.sidebarPages)) {
+                if (navItem.href.indexOf(k) > -1) {
+                  navItem.page = k;
+                  this.sidebar.push(navItem);
+                }
+              }
             }
           });
       });
+  }
+
+  sidebarLink(page) {
+    this.navCtrl.push(this.sidebarPages[page], {
+      course: this.course,
+    });
   }
 
 }

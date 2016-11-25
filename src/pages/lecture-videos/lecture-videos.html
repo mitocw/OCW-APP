@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{ course.num }} / Lecture Videos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor='let listing of listings'>
+    <img [src]='listing.image'/>
+    <ion-card-content>
+      <ion-card-title>
+        {{listing.name}}
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
