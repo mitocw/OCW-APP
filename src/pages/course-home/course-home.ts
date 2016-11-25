@@ -23,7 +23,16 @@ export class CourseHomePage {
 
     http.get(`https://ocw.mit.edu${this.course.href}/`)
       .subscribe(course => {
-        $(course.text().replace(/(\s\s)|\n|\t/g,'').match(/\<body.*\/body\>/)[0])
+        let courseRaw = $(course.text().replace(/(\s\s)|\n|\t/g,'').match(/\<body.*\/body\>/)[0]);
+
+        let inner = courseRaw
+          .find('#course_inner_chp');
+
+        this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('src')}`;
+        this.course.description = $(inner).find('#description p')[0].innerText;
+
+        // Fetch sidebar links
+        courseRaw
           .find('nav#course_nav > ul > li')
           .map(li => {
             let first = $(li.firstChild);

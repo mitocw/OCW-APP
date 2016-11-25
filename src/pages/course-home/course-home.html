@@ -31,4 +31,15 @@
 </ion-menu>
 
 <ion-content #courseContent>
+  <ion-card>
+    <img [src]="course.image"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{ course.name }}
+      </ion-card-title>
+      <p>
+        {{ course.description }}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
