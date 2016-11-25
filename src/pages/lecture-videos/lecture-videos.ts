@@ -3,6 +3,8 @@ import $ from 'jqlite';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 
+import { LectureVideoSinglePage } from '../lecture-video-single/lecture-video-single';
+
 @Component({
   selector: 'page-lecture-videos',
   templateUrl: 'lecture-videos.html'
@@ -11,6 +13,7 @@ export class LectureVideosPage {
 
   public course: any;
   public listings: any = [];
+  public lectureVideoPage: any = LectureVideoSinglePage;
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams) {
     this.course = navParams.get('course');
@@ -28,6 +31,13 @@ export class LectureVideosPage {
             this.listings.push(newListing);
           });
       });
+  }
+
+  loadVideo(listing: any) {
+    this.navCtrl.push(this.lectureVideoPage, {
+      course: this.course,
+      listing
+    });
   }
 
 }

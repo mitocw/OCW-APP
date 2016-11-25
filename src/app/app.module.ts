@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { DepartmentPage } from '../pages/department/department';
 import { CourseHomePage } from '../pages/course-home/course-home';
 import { LectureVideosPage } from '../pages/lecture-videos/lecture-videos';
+import { LectureVideoSinglePage } from '../pages/lecture-video-single/lecture-video-single';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LectureVideosPage } from '../pages/lecture-videos/lecture-videos';
     TabsPage,
     CourseHomePage,
     LectureVideosPage,
+    LectureVideoSinglePage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -30,6 +32,7 @@ import { LectureVideosPage } from '../pages/lecture-videos/lecture-videos';
     DepartmentPage,
     CourseHomePage,
     LectureVideosPage,
+    LectureVideoSinglePage,
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
