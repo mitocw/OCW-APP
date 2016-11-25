@@ -8,8 +8,10 @@ import { NavController, ViewController, NavParams } from 'ionic-angular';
 })
 export class CourseHomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  public course: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    this.course = navParams.get('course');
   }
 
 }
