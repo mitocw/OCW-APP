@@ -45,6 +45,7 @@ export class DepartmentPage {
     let search = e.target.value;
 
     if (search && search.trim() != '') {
+      search = search.toLowerCase();
       this.courses.Graduate = this.courses.Graduate.filter(course => {
         return (course.num.toLowerCase().indexOf(search) > -1 || course.name.toLowerCase().indexOf(search) > -1);
       });
