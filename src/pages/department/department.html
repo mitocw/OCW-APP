@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar (ionInput)="searchCourses($event)"></ion-searchbar>
   <ion-list>
-    <ion-item-group>
+    <ion-item-group *ngIf="courses.Undergraduate.length > 0">
       <ion-item-divider color="primary">Undergraduate</ion-item-divider>
       <ion-item
         (click)="viewCourse(course)"

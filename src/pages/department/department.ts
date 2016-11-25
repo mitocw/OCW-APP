@@ -15,6 +15,7 @@ export class DepartmentPage {
     'Graduate': [],
     'Undergraduate': []
   };
+  public _courses: any;
   public courseHomePage: any = CourseHomePage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
@@ -30,10 +31,28 @@ export class DepartmentPage {
       };
       this.courses[level].push(course);
     }
+
+    this._courses = JSON.parse(JSON.stringify(this.courses));
   }
 
   viewCourse(course) {
     this.navCtrl.push(this.courseHomePage, { course });
+  }
+
+  searchCourses(e: any) {
+    this.courses = JSON.parse(JSON.stringify(this._courses));
+
+    let search = e.target.value;
+
+    if (search && search.trim() != '') {
+      this.courses.Graduate = this.courses.Graduate.filter(course => {
+        return (course.num.toLowerCase().indexOf(search) > -1 || course.name.toLowerCase().indexOf(search) > -1);
+      });
+      this.courses.Undergraduate = this.courses.Undergraduate.filter(course => {
+        return (course.num.toLowerCase().indexOf(search) > -1 || course.name.toLowerCase().indexOf(search) > -1);
+      });
+    }
+
   }
 
 }
