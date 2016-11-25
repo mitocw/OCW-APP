@@ -46,7 +46,6 @@ export class HomePage {
   }
 
   viewDepartment(dep) {
-    dep.raw = this.departmentRaw[dep.href];
     this.navCtrl.push(this.departmentPage, {
       dep: Object.assign({}, dep)
     });

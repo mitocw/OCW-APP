@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import $ from 'jqlite';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 
@@ -18,21 +19,18 @@ export class DepartmentPage {
   public _courses: any;
   public courseHomePage: any = CourseHomePage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-    this.dep = navParams.get('dep');
-    let courses = $(this.dep.raw.match(/\<table.*\/table>/)[0]).find('tr.odd,tr.even');
-    for (let i: number = 0; i < courses.length; i++) {
-      let a:any = $(courses[i]).find('a');
-      let level = a[2].innerText.trim();
-      let course = {
-        num: a[0].innerText.trim(),
-        name: a[1].innerText.trim(),
-        href: $(a[0]).attr('href'),
-      };
-      this.courses[level].push(course);
-    }
+  constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
 
-    this._courses = JSON.parse(JSON.stringify(this.courses));
+    this.dep = navParams.get('dep');
+    http.get(`https://ocw.mit.edu${this.dep.href}/index.json`)
+      .subscribe(data => {
+        for (let d of data.json()) {
+          this.courses[d.level].push(d);
+        }
+        this._courses = JSON.parse(JSON.stringify(this.courses));
+        console.log(this.courses);
+      });
+
   }
 
   viewCourse(course) {
