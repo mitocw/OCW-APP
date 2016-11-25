@@ -8,15 +8,19 @@ import { NavController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable'
 
+import { DepartmentPage } from '../department/department';
+
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage {
 
   departmentsHome: Observable<any>;
   departmentImage: Object = {};
   departmentRaw: Object = {};
+
+  departmentPage: any = DepartmentPage;
 
   constructor(public navCtrl: NavController, private http: Http, private sanitizer: DomSanitizer) {
     this.departmentsHome = http.get('https://ocw.mit.edu/courses/find-by-department/')
@@ -37,6 +41,14 @@ export class HomePage {
         }));
 
     console.log(this.departmentImage);
+  }
+
+  viewDepartment(dep) {
+    dep.raw = this.departmentRaw[dep.href];
+    this.navCtrl.push(this.departmentPage, {
+      dep: Object.assign({}, dep)
+    });
+    delete dep.raw;
   }
 
 }

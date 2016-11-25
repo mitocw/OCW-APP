@@ -6,7 +6,12 @@
 
 <ion-content>
   <div class="row responsive-grid">
-    <div *ngFor="let dep of departmentsHome | async" [style.backgroundImage]="departmentImage[dep.href]" class="department">
+    <div
+      *ngFor="let dep of departmentsHome | async"
+      [style.backgroundImage]="departmentImage[dep.href]"
+      class="department"
+      (click)="viewDepartment(dep)"
+      >
       <div>
         <p>
           {{dep.name}}
