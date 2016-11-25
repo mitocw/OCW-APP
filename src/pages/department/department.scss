@@ -8,11 +8,12 @@ page-department {
         padding: 2px;
         &:nth-child(1) {
           font-weight: bold;
+          flex: 20%;
+        }
+        &:nth-child(2) {
+          flex: 80%;
         }
       }
-    }
-    &:nth-child(odd) {
-      background-color: map-get($colors, light);
     }
   }
 
