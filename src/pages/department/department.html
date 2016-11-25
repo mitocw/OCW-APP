@@ -15,8 +15,24 @@
         (click)="viewCourse(course)"
         *ngFor="let course of courses.Undergraduate; let i = index">
         <div>
-          <span>{{ course.mcn }}</span>
-          <span>{{ course.title }}</span>
+          <span class="mcn">
+            <span>
+              {{ course.mcn }}
+            </span>
+            <span>
+              {{ course.sem }}
+            </span>
+          </span>
+          <span class="body">
+            <span>
+              {{ course.title }}
+            </span>
+            <span>
+              <ion-chip *ngFor="let feature of course.topics; let j = index">
+                {{feature.subCat}}
+              </ion-chip>
+            </span>
+          </span>
         </div>
       </ion-item>
     </ion-item-group>
@@ -26,8 +42,24 @@
         (click)="viewCourse(course)"
         *ngFor="let course of courses.Graduate; let i = index">
         <div>
-          <span>{{ course.mcn }}</span>
-          <span>{{ course.title }}</span>
+          <span class="mcn">
+            <span>
+              {{ course.mcn }}
+            </span>
+            <span>
+              {{ course.sem }}
+            </span>
+          </span>
+          <span class="body">
+            <span>
+              {{ course.title }}
+            </span>
+            <span>
+              <ion-chip *ngFor="let feature of course.topics; let j = index">
+                {{feature.subCat}}
+              </ion-chip>
+            </span>
+          </span>
         </div>
       </ion-item>
     </ion-item-group>

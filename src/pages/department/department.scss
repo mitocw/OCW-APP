@@ -3,18 +3,27 @@ page-department {
   ion-item {
     div {
       display: flex;
-      span {
+      & .mcn {
+        display: flex;
+        flex-direction: column;
         white-space: normal;
         padding: 2px;
-        &:nth-child(1) {
-          font-weight: bold;
-          flex: 20%;
+        font-weight: bold;
+        flex: 20%;
+        & span {
+          padding: 5px 0;
         }
-        &:nth-child(2) {
-          flex: 80%;
+      }
+      & .body {
+        display: flex;
+        flex-direction: column;
+        white-space: normal;
+        padding: 2px;
+        flex: 80%;
+        & span {
+          padding: 5px 0;
         }
       }
     }
   }
-
 }
