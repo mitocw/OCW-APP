@@ -45,10 +45,10 @@ export class DepartmentPage {
     if (search && search.trim() != '') {
       search = search.toLowerCase();
       this.courses.Graduate = this.courses.Graduate.filter(course => {
-        return (course.num.toLowerCase().indexOf(search) > -1 || course.name.toLowerCase().indexOf(search) > -1);
+        return (course.mcn.toLowerCase().indexOf(search) > -1 || course.title.toLowerCase().indexOf(search) > -1);
       });
       this.courses.Undergraduate = this.courses.Undergraduate.filter(course => {
-        return (course.num.toLowerCase().indexOf(search) > -1 || course.name.toLowerCase().indexOf(search) > -1);
+        return (course.mcn.toLowerCase().indexOf(search) > -1 || course.title.toLowerCase().indexOf(search) > -1);
       });
     }
 
