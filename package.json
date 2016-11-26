@@ -2,6 +2,9 @@
   "name": "mit-ocw-app",
   "homepage": "https://github.com/warent/MIT-OCW/",
   "private": true,
+  "contributors": [
+    "Wyatt Arent <hello@wyatt.ninja> (http://wyatt.ninja)"
+  ],
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
     "ionic:watch": "ionic-app-scripts watch",

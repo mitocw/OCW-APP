@@ -28,7 +28,6 @@ export class DepartmentPage {
           this.courses[d.level].push(d);
         }
         this._courses = JSON.parse(JSON.stringify(this.courses));
-        console.log(this.courses);
       });
 
   }

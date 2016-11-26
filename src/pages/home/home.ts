@@ -42,7 +42,6 @@ export class HomePage {
           return dp;
         }));
 
-    console.log(this.departmentImage);
   }
 
   viewDepartment(dep) {
