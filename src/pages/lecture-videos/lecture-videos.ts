@@ -18,7 +18,7 @@ export class LectureVideosPage {
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams) {
     this.course = navParams.get('course');
 
-    http.get(`https://ocw.mit.edu${this.course.href}/lecture-videos/`)
+    http.get(`https://ocw.mit.edu${this.course.href}/${navParams.get('href')}/`)
       .subscribe(course => {
         $(course.text()
           .replace(/(\s\s)|\n|\t/g,'')

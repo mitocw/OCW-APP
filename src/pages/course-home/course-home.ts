@@ -15,7 +15,8 @@ export class CourseHomePage {
   public sidebar: any = [];
 
   public sidebarPages: any = {
-    'lecture-videos': LectureVideosPage
+    'lecture-videos': LectureVideosPage,
+    'recitation-videos': LectureVideosPage
   };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
@@ -62,6 +63,7 @@ export class CourseHomePage {
   sidebarLink(page) {
     this.navCtrl.push(this.sidebarPages[page], {
       course: this.course,
+      id: page,
     });
   }
 
