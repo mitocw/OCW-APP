@@ -4,6 +4,7 @@ import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 import { LectureVideosPage } from '../lecture-videos/lecture-videos';
+import { CourseHtmlPage } from '../course-html-page/course-html-page';
 
 @Component({
   selector: 'page-course-home',
@@ -16,7 +17,9 @@ export class CourseHomePage {
 
   public sidebarPages: any = {
     'lecture-videos': LectureVideosPage,
-    'recitation-videos': LectureVideosPage
+    'recitation-videos': LectureVideosPage,
+    'assignments': CourseHtmlPage,
+    'lecture-notes': CourseHtmlPage,
   };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
