@@ -23,6 +23,7 @@ export class CourseHomePage {
     'software': CourseHtmlPage,
     'syllabus': CourseHtmlPage,
     'calendar': CourseHtmlPage,
+    'readings': CourseHtmlPage,
   };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
