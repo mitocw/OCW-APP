@@ -19,7 +19,7 @@ export class LectureVideosPage {
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams) {
     this.course = navParams.get('course');
     this.title = navParams.get('title');
-    
+
     http.get(`https://ocw.mit.edu${this.course.href}/${navParams.get('href')}/`)
       .subscribe(course => {
         $(course.text()
@@ -30,6 +30,8 @@ export class LectureVideosPage {
           .map(listing => {
             let newListing: any = {};
             newListing.image = $(listing).find('img').attr('mit-src');
+            // Relatively-linked images
+            if (newListing.image.charAt(0) == '/') newListing.image = `https://ocw.mit.edu${newListing.image}`;
             let link = $(listing).find('.medialink');
             newListing.href = link.attr('href');
             newListing.name = link[0].innerText;
