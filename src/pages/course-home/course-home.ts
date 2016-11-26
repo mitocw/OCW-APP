@@ -17,6 +17,7 @@ export class CourseHomePage {
 
   public sidebarPages: any = {
     'lecture-videos': LectureVideosPage,
+    'video-lectures': LectureVideosPage,
     'recitation-videos': LectureVideosPage,
     'assignments': CourseHtmlPage,
     'lecture-notes': CourseHtmlPage,
