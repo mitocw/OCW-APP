@@ -26,7 +26,7 @@ export class CourseHtmlPage {
           .replace(/href="\//g, 'href="https://ocw.mit.edu/'))
           .find('main#course_inner_section')[0];
 
-        for (let invalid of innerContent.querySelectorAll('.help')) {
+        for (let invalid of innerContent.querySelectorAll('.help,.sc_nav')) {
           invalid.parentNode.removeChild(invalid);
         }
         for (let a of innerContent.querySelectorAll('a')) {
