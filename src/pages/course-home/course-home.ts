@@ -22,6 +22,7 @@ export class CourseHomePage {
     'lecture-notes': CourseHtmlPage,
     'software': CourseHtmlPage,
     'syllabus': CourseHtmlPage,
+    'calendar': CourseHtmlPage,
   };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
