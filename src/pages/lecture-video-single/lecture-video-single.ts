@@ -23,7 +23,7 @@ export class LectureVideoSinglePage {
         let video = lecture.text()
           .replace(/(\s\s)|\n|\t/g,'')
           .replace(/src\=/g, 'mit-src=')
-          .match(/https\:\/\/www.youtube.com\/(v|embed)\/\w+/)[0];
+          .match(/https\:\/\/www.youtube.com\/(v|embed)\/(\w|\-)+/)[0];
         if (video) {
           video = video.replace('/v/', '/embed/');
           this.lecture.video = sanitizer.bypassSecurityTrustResourceUrl(video);

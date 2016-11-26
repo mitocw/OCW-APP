@@ -63,7 +63,7 @@ export class CourseHomePage {
   sidebarLink(page) {
     this.navCtrl.push(this.sidebarPages[page], {
       course: this.course,
-      id: page,
+      href: page,
     });
   }
 
