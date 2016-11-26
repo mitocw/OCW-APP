@@ -60,10 +60,11 @@ export class CourseHomePage {
       });
   }
 
-  sidebarLink(page) {
-    this.navCtrl.push(this.sidebarPages[page], {
+  sidebarLink(nav) {
+    this.navCtrl.push(this.sidebarPages[nav.page], {
       course: this.course,
-      href: page,
+      href: nav.page,
+      title: nav.name
     });
   }
 

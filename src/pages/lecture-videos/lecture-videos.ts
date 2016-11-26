@@ -14,10 +14,12 @@ export class LectureVideosPage {
   public course: any;
   public listings: any = [];
   public lectureVideoPage: any = LectureVideoSinglePage;
+  public title: string;
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams) {
     this.course = navParams.get('course');
-
+    this.title = navParams.get('title');
+    
     http.get(`https://ocw.mit.edu${this.course.href}/${navParams.get('href')}/`)
       .subscribe(course => {
         $(course.text()
