@@ -20,6 +20,7 @@ export class CourseHomePage {
     'recitation-videos': LectureVideosPage,
     'assignments': CourseHtmlPage,
     'lecture-notes': CourseHtmlPage,
+    'software': CourseHtmlPage,
   };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
