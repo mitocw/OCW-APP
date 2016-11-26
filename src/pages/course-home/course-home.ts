@@ -66,6 +66,7 @@ export class CourseHomePage {
                 hrefEnd = hrefEnd.pop();
                 if (hrefEnd.indexOf(k) > -1) {
                   navItem.page = hrefEnd;
+                  navItem.view = k;
                   this.sidebar.push(navItem);
                 }
               }
@@ -75,7 +76,7 @@ export class CourseHomePage {
   }
 
   sidebarLink(nav) {
-    this.navCtrl.push(this.sidebarPages[nav.page], {
+    this.navCtrl.push(this.sidebarPages[nav.view], {
       course: this.course,
       href: nav.page,
       title: nav.name
