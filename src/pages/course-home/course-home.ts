@@ -55,8 +55,13 @@ export class CourseHomePage {
                 href: first.attr('href'),
               };
               for (let k of Object.keys(this.sidebarPages)) {
-                if (navItem.href.indexOf(k) > -1) {
-                  navItem.page = k;
+                let hrefEnd = navItem.href.split('/');
+                 // We're fetching the final document slug
+                 // Sometimes it has a trailing slash, in which case we need to remove it.
+                if (hrefEnd[hrefEnd.length-1] == '') hrefEnd.pop();
+                hrefEnd = hrefEnd.pop();
+                if (hrefEnd.indexOf(k) > -1) {
+                  navItem.page = hrefEnd;
                   this.sidebar.push(navItem);
                 }
               }
