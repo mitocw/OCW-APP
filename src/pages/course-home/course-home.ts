@@ -25,7 +25,7 @@ export class CourseHomePage {
     'syllabus': CourseHtmlPage,
     'calendar': CourseHtmlPage,
     'readings': CourseHtmlPage,
-    'exams': CourseHtmlPage,
+    'exam': CourseHtmlPage,
   };
 
   constructor(public navCtrl: NavController, private http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
