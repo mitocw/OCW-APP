@@ -25,8 +25,7 @@ export class CourseHtmlPage {
           .match(/\<body.*\/body\>/)[0]
           .replace(/href="\//g, 'href="https://ocw.mit.edu/'))
           .find('main#course_inner_section')[0];
-
-        for (let invalid of innerContent.querySelectorAll('.help,.sc_nav')) {
+        for (let invalid of innerContent.querySelectorAll('.help,.sc_nav,.sc_nav_bottom')) {
           invalid.parentNode.removeChild(invalid);
         }
         for (let a of innerContent.querySelectorAll('a')) {
@@ -34,7 +33,7 @@ export class CourseHtmlPage {
         }
 
 
-        this.content = innerContent.innerHTML;
+        this.content = innerContent.innerHTML.replace(/mit\-src\="\//g, 'src="https://ocw.mit.edu/');
       });
   }
 
