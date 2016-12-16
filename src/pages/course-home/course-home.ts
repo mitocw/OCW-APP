@@ -75,6 +75,10 @@ export class CourseHomePage {
       });
   }
 
+  back() {
+    this.navCtrl.pop();
+  }
+
   sidebarLink(nav) {
     this.navCtrl.push(this.sidebarPages[nav.view], {
       course: this.course,
