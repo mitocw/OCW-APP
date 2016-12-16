@@ -100,7 +100,8 @@ export class CourseHomeNavPage {
   sidebarLink(nav) {
     this.course_nav.setRoot(this.sidebarPages[nav.view], {
       course: this.course,
-      href: nav.page
+      href: nav.page,
+      nav: this.navCtrl,
     });
     this.title = `${this.course.mcn} / ${nav.name}`;
     this.menuCtrl.close();
