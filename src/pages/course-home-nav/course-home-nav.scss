@@ -1,0 +1,6 @@
+page-course-home-nav {
+  #course-content > .scroll-content {
+    // Ionic seems to overcorrect margins when nesting ionic-nav
+    margin-bottom: 0 !important;
+  }
+}

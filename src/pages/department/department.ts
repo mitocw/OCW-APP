@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 
-import { CourseHomePage } from '../course-home/course-home';
+import { CourseHomeNavPage } from '../course-home-nav/course-home-nav';
 
 @Component({
   selector: 'page-department',
@@ -16,7 +16,7 @@ export class DepartmentPage {
     'Undergraduate': []
   };
   public _courses: any;
-  public courseHomePage: any = CourseHomePage;
+  public courseHomeNavPage: any = CourseHomeNavPage;
 
   constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams, public viewCtrl: ViewController) {
 
@@ -32,7 +32,7 @@ export class DepartmentPage {
   }
 
   viewCourse(course) {
-    this.navCtrl.push(this.courseHomePage, { course });
+    this.navCtrl.push(this.courseHomeNavPage, { course });
   }
 
   searchCourses(e: any) {

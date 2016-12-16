@@ -6,6 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DepartmentPage } from '../pages/department/department';
 import { CourseHomePage } from '../pages/course-home/course-home';
+import { CourseHomeNavPage } from '../pages/course-home-nav/course-home-nav';
 import { LectureVideosPage } from '../pages/lecture-videos/lecture-videos';
 import { LectureVideoSinglePage } from '../pages/lecture-video-single/lecture-video-single';
 import { CourseHtmlPage } from '../pages/course-html-page/course-html-page';
@@ -18,6 +19,7 @@ import { CourseHtmlPage } from '../pages/course-html-page/course-html-page';
     DepartmentPage,
     TabsPage,
     CourseHomePage,
+    CourseHomeNavPage,
     LectureVideosPage,
     LectureVideoSinglePage,
     CourseHtmlPage,
@@ -33,6 +35,7 @@ import { CourseHtmlPage } from '../pages/course-html-page/course-html-page';
     TabsPage,
     DepartmentPage,
     CourseHomePage,
+    CourseHomeNavPage,
     LectureVideosPage,
     LectureVideoSinglePage,
     CourseHtmlPage,

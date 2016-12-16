@@ -1,42 +1,4 @@
-<ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      {{ course.mcn }} ({{ course.sem }})
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="star"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
-<ion-menu [persistent]="true" [content]="courseContent">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>
-        Navigate
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item
-        *ngFor="let nav of sidebar"
-        (click)="sidebarLink(nav)">
-        {{nav.name}}
-      </ion-item>
-      <ion-item (click)="back()">
-        Back
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-content #courseContent>
+<ion-content>
   <ion-card>
     <img [src]="course.image"/>
     <ion-card-content>
