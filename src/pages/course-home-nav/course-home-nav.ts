@@ -91,6 +91,12 @@ export class CourseHomeNavPage {
     this.navCtrl.pop();
   }
 
+  courseHome() {
+    this.course_nav.setRoot(CourseHomePage, { course: this.course });
+    this.title = `${this.course.mcn} (${ this.course.sem })`;
+    this.menuCtrl.close();
+  }
+
   sidebarLink(nav) {
     this.course_nav.setRoot(this.sidebarPages[nav.view], {
       course: this.course,

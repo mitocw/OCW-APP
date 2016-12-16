@@ -24,6 +24,9 @@
   </ion-header>
   <ion-content>
     <ion-list>
+      <ion-item (click)="courseHome()">
+        Course Home
+      </ion-item>
       <ion-item
         *ngFor="let nav of sidebar"
         (click)="sidebarLink(nav)">
