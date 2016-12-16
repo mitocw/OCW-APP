@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import $ from 'jqlite';
-import { NavController, ViewController, NavParams } from 'ionic-angular';
-import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Http } from '@angular/http';
 
 @Component({

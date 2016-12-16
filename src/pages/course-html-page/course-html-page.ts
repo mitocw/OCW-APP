@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import $ from 'jqlite';
-import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 @Component({
