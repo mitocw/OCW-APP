@@ -7,6 +7,8 @@ import { LectureVideosPage } from '../lecture-videos/lecture-videos';
 import { CourseHtmlPage } from '../course-html-page/course-html-page';
 import { CourseHomePage } from '../course-home/course-home';
 
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'page-course-home-nav',
   templateUrl: 'course-home-nav.html'
@@ -17,6 +19,16 @@ export class CourseHomeNavPage {
   public course: any;
   public sidebar: any = [];
   public title: string = "Loading...";
+
+  private _favorited: boolean = false;
+
+  get isFavorited(): boolean {
+    return this._favorited;
+  }
+
+  set isFavorited(val: boolean) {
+    this._favorited = val;
+  }
 
   public sidebarPages: any = {
     'lecture-videos': LectureVideosPage,
@@ -36,7 +48,8 @@ export class CourseHomeNavPage {
     private http: Http,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public menuCtrl: MenuController,) {
+    public menuCtrl: MenuController,
+    public storage: Storage) {
     this.course = navParams.get('course');
 
     http.get(`https://ocw.mit.edu${this.course.href}/index.json`)
@@ -105,6 +118,10 @@ export class CourseHomeNavPage {
     });
     this.title = `${this.course.mcn} / ${nav.name}`;
     this.menuCtrl.close();
+  }
+
+  toggleFavorite() {
+    this.isFavorited = !this.isFavorited;
   }
 
 }

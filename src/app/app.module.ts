@@ -10,6 +10,7 @@ import { CourseHomeNavPage } from '../pages/course-home-nav/course-home-nav';
 import { LectureVideosPage } from '../pages/lecture-videos/lecture-videos';
 import { LectureVideoSinglePage } from '../pages/lecture-video-single/lecture-video-single';
 import { CourseHtmlPage } from '../pages/course-html-page/course-html-page';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,9 @@ import { CourseHtmlPage } from '../pages/course-html-page/course-html-page';
     LectureVideoSinglePage,
     CourseHtmlPage,
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    Storage,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
+  ]
 })
 export class AppModule {}

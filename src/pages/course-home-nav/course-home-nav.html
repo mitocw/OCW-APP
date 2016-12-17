@@ -7,8 +7,8 @@
       {{ title }}
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="star-outline"></ion-icon>
+      <button ion-button icon-only (click)="toggleFavorite()">
+        <ion-icon [name]="isFavorited ? 'star' : 'star-outline'"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
