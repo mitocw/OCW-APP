@@ -27,7 +27,9 @@ export class CourseHomeNavPage {
   }
 
   set isFavorited(val: boolean) {
-    this._favorited = val;
+    this.storage.set(`favorites.${this.title}`, val).then(newVal => {
+      this._favorited = newVal;
+    });
   }
 
   public sidebarPages: any = {
@@ -50,54 +52,59 @@ export class CourseHomeNavPage {
     public viewCtrl: ViewController,
     public menuCtrl: MenuController,
     public storage: Storage) {
-    this.course = navParams.get('course');
 
-    http.get(`https://ocw.mit.edu${this.course.href}/index.json`)
-      .subscribe(course => {
-        this.course = Object.assign(this.course, course.json());
-      });
+      this.course = navParams.get('course');
 
-    http.get(`https://ocw.mit.edu${this.course.href}/`)
-      .subscribe(course => {
-        let courseRaw = $(course.text()
-          .replace(/(\s\s)|\n|\t/g,'')
-          .replace(/src\=/g, 'mit-src=') // jqlite will attempt to load images when parsing the html
-          .match(/\<body.*\/body\>/)[0]);
+      http.get(`https://ocw.mit.edu${this.course.href}/index.json`)
+        .subscribe(course => {
+          this.course = Object.assign(this.course, course.json());
+        });
 
-        let inner = courseRaw
-          .find('#course_inner_chp');
+      http.get(`https://ocw.mit.edu${this.course.href}/`)
+        .subscribe(course => {
+          let courseRaw = $(course.text()
+            .replace(/(\s\s)|\n|\t/g,'')
+            .replace(/src\=/g, 'mit-src=') // jqlite will attempt to load images when parsing the html
+            .match(/\<body.*\/body\>/)[0]);
 
-        this.title = `${this.course.mcn} (${ this.course.sem })`;
+          let inner = courseRaw
+            .find('#course_inner_chp');
 
-        this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('mit-src')}`;
+          this.title = `${this.course.mcn} (${ this.course.sem })`;
 
-        this.course_nav.setRoot(CourseHomePage, { course: this.course });
+          this.storage.get(`favorites.${this.title}`).then((val) => {
+            this.isFavorited = !!val;
+          });
 
-        // Fetch sidebar links
-        courseRaw
-          .find('nav#course_nav > ul > li')
-          .map(li => {
-            let first = $(li.firstChild);
-            if (first[0].localName == 'a') {
-              let navItem: any = {
-                name: first[0].innerText.trim(),
-                href: first.attr('href'),
-              };
-              for (let k of Object.keys(this.sidebarPages)) {
-                let hrefEnd = navItem.href.split('/');
-                 // We're fetching the final document slug
-                 // Sometimes it has a trailing slash, in which case we need to remove it.
-                if (hrefEnd[hrefEnd.length-1] == '') hrefEnd.pop();
-                hrefEnd = hrefEnd.pop();
-                if (hrefEnd.indexOf(k) > -1) {
-                  navItem.page = hrefEnd;
-                  navItem.view = k;
-                  this.sidebar.push(navItem);
+          this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('mit-src')}`;
+
+          this.course_nav.setRoot(CourseHomePage, { course: this.course });
+
+          // Fetch sidebar links
+          courseRaw
+            .find('nav#course_nav > ul > li')
+            .map(li => {
+              let first = $(li.firstChild);
+              if (first[0].localName == 'a') {
+                let navItem: any = {
+                  name: first[0].innerText.trim(),
+                  href: first.attr('href'),
+                };
+                for (let k of Object.keys(this.sidebarPages)) {
+                  let hrefEnd = navItem.href.split('/');
+                   // We're fetching the final document slug
+                   // Sometimes it has a trailing slash, in which case we need to remove it.
+                  if (hrefEnd[hrefEnd.length-1] == '') hrefEnd.pop();
+                  hrefEnd = hrefEnd.pop();
+                  if (hrefEnd.indexOf(k) > -1) {
+                    navItem.page = hrefEnd;
+                    navItem.view = k;
+                    this.sidebar.push(navItem);
+                  }
                 }
               }
-            }
-          });
-      });
+            });
+        });
   }
 
   back() {
