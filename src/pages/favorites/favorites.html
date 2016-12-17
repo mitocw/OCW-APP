@@ -6,6 +6,17 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <ion-card *ngFor="let course of favorites">
+    <img [src]="course.image"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{ course.title }}
+      </ion-card-title>
+      <h2><b>{{ course.instructors }}</b></h2>
+      <p>
+        {{ course.description }}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

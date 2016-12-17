@@ -9,9 +9,11 @@ import { CourseHomePage } from '../course-home/course-home';
 
 import { Storage } from '@ionic/storage';
 
+import { FavoriteService } from '../../services/favorites';
+
 @Component({
   selector: 'page-course-home-nav',
-  templateUrl: 'course-home-nav.html'
+  templateUrl: 'course-home-nav.html',
 })
 export class CourseHomeNavPage {
   @ViewChild('courseContent') course_nav : NavController;
@@ -20,16 +22,23 @@ export class CourseHomeNavPage {
   public sidebar: any = [];
   public title: string = "Loading...";
 
-  private _favorited: boolean = false;
+  private _favorited: any = false;
 
-  get isFavorited(): boolean {
+  get isFavorited(): any {
     return this._favorited;
   }
 
-  set isFavorited(val: boolean) {
-    this.storage.set(`favorites.${this.title}`, val).then(newVal => {
-      this._favorited = newVal;
-    });
+  set isFavorited(val: any) {
+    if (val == false) {
+      this.storage.remove(this.favKey());
+      this._favorited = false;
+      this.favService.removeFavorite(this.favKey());
+    } else {
+      this.storage.set(this.favKey(), val).then(newVal => {
+        this._favorited = newVal;
+        this.favService.addFavorite(newVal);
+      });
+    }
   }
 
   public sidebarPages: any = {
@@ -51,13 +60,26 @@ export class CourseHomeNavPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public menuCtrl: MenuController,
-    public storage: Storage) {
+    public storage: Storage,
+    public favService: FavoriteService) {
+
+      this.favService.onRemoveFavorite.subscribe(favKey => {
+
+      });
+      this.favService.onAddFavorite.subscribe(favKey => {
+
+      });
 
       this.course = navParams.get('course');
 
       http.get(`https://ocw.mit.edu${this.course.href}/index.json`)
         .subscribe(course => {
           this.course = Object.assign(this.course, course.json());
+          this.course.favKey = this.favKey();
+          this.storage.get(this.favKey()).then(val => {
+            if (!!val == false) this.isFavorited = false;
+            else this.isFavorited = JSON.stringify(this.course);
+          });
         });
 
       http.get(`https://ocw.mit.edu${this.course.href}/`)
@@ -71,10 +93,6 @@ export class CourseHomeNavPage {
             .find('#course_inner_chp');
 
           this.title = `${this.course.mcn} (${ this.course.sem })`;
-
-          this.storage.get(`favorites.${this.title}`).then((val) => {
-            this.isFavorited = !!val;
-          });
 
           this.course.image = `https://ocw.mit.edu${$(inner).find('#chpImage img').attr('mit-src')}`;
 
@@ -128,7 +146,11 @@ export class CourseHomeNavPage {
   }
 
   toggleFavorite() {
-    this.isFavorited = !this.isFavorited;
+    this.isFavorited = !!this.isFavorited ? false : JSON.stringify(this.course);;
+  }
+
+  private favKey() {
+    return `favorites.${this.course.href}`;
   }
 
 }

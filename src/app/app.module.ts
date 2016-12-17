@@ -11,6 +11,7 @@ import { LectureVideosPage } from '../pages/lecture-videos/lecture-videos';
 import { LectureVideoSinglePage } from '../pages/lecture-video-single/lecture-video-single';
 import { CourseHtmlPage } from '../pages/course-html-page/course-html-page';
 import { Storage } from '@ionic/storage';
+import { FavoriteService } from '../services/favorites';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { Storage } from '@ionic/storage';
   ],
   providers: [
     Storage,
+    FavoriteService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

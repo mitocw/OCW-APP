@@ -1,0 +1,25 @@
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
+@Injectable()
+export class FavoriteService {
+
+  private _sAddFav: Subject<any> = new Subject<any>();
+  private _sRemFav: Subject<any> = new Subject<any>();
+
+  get onAddFavorite(): Observable<any> {
+    return this._sAddFav.asObservable();
+  }
+  get onRemoveFavorite(): Observable<any> {
+    return this._sRemFav.asObservable();
+  }
+
+  addFavorite(fav): void {
+    this._sAddFav.next(fav);
+  }
+  removeFavorite(fav): void {
+    this._sRemFav.next(fav);
+  }
+
+}
