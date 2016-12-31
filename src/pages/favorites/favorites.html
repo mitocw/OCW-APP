@@ -8,7 +8,8 @@
 
 <ion-content>
   <ion-list>
-    <ion-item text-wrap *ngFor="let course of favorites">
+    <ion-item *ngFor="let course of favorites"
+     text-wrap (click)="viewCourse(course)">
       <ion-avatar item-left>
         <img [src]="course.image">
       </ion-avatar>

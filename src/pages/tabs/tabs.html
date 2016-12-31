@@ -1,4 +1,4 @@
-<ion-tabs>
-  <ion-tab [root]="HomePage" tabTitle="Home" tabIcon="home"></ion-tab>
+<ion-tabs #rootTabs>
+  <ion-tab [root]="HomePage" [rootParams]="homeParams" tabTitle="Home" tabIcon="home"></ion-tab>
   <ion-tab [root]="FavoritesPage" tabTitle="Favorites" tabIcon="star"></ion-tab>
 </ion-tabs>

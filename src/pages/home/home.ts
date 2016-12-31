@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import $ from 'jqlite';
 
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable'
 
@@ -22,7 +22,7 @@ export class HomePage {
 
   departmentPage: any = DepartmentPage;
 
-  constructor(public navCtrl: NavController, private http: Http, private sanitizer: DomSanitizer) {
+  constructor(public navCtrl: NavController, private http: Http, private sanitizer: DomSanitizer, private navParams: NavParams) {
     this.departmentsHome = http.get('https://ocw.mit.edu/courses/find-by-department/')
       .map(data => $(data.text().replace(/src\=/g, 'mit-src='))
         .find('.deptList')
@@ -41,7 +41,6 @@ export class HomePage {
           });
           return dp;
         }));
-
   }
 
   viewDepartment(dep) {

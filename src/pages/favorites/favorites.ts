@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FavoriteService } from '../../services/favorites';
 
@@ -12,7 +12,7 @@ export class FavoritesPage {
 
   public favorites: any[] = [];
 
-  constructor(public navCtrl: NavController, public storage: Storage, public favService: FavoriteService) {
+  constructor(public navCtrl: NavController, public storage: Storage, public favService: FavoriteService, public app: App) {
     this.storage.forEach((v, k) => {
       // If either v or k is falsey, skip
       if (!!!v || !!!k) return;
@@ -35,5 +35,8 @@ export class FavoritesPage {
       });
     });
 
+  }
+  viewCourse(course) {
+    this.favService.openFavorite(course)
   }
 }
