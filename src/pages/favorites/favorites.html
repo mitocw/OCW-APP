@@ -8,6 +8,9 @@
 
 <ion-content>
   <ion-list>
+    <ion-item text-wrap *ngIf="!favorites.length">
+      <h1>Open a course and click the star in the top-right corner!</h1>
+    </ion-item>
     <ion-item *ngFor="let course of favorites"
      text-wrap (click)="viewCourse(course)">
       <ion-avatar item-left>
