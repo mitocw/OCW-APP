@@ -36,7 +36,6 @@ export class CourseHomeNavPage {
     } else {
       this.storage.set(this.favKey(), val).then(newVal => {
         this._favorited = newVal;
-        this.favService.addFavorite(newVal);
       });
     }
   }
@@ -62,13 +61,6 @@ export class CourseHomeNavPage {
     public menuCtrl: MenuController,
     public storage: Storage,
     public favService: FavoriteService) {
-
-      this.favService.onRemoveFavorite.subscribe(favKey => {
-
-      });
-      this.favService.onAddFavorite.subscribe(favKey => {
-
-      });
 
       this.course = navParams.get('course');
 
@@ -146,7 +138,12 @@ export class CourseHomeNavPage {
   }
 
   toggleFavorite() {
-    this.isFavorited = !!this.isFavorited ? false : JSON.stringify(this.course);;
+    this.isFavorited = !!this.isFavorited ? false : JSON.stringify(this.course);
+    if (!this.isFavorited) {
+      this.favService.removeFavorite(this.favKey());
+    } else {
+      this.favService.addFavorite(this.isFavorited);
+    }
   }
 
   private favKey() {
