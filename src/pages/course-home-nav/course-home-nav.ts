@@ -138,11 +138,12 @@ export class CourseHomeNavPage {
   }
 
   toggleFavorite() {
-    this.isFavorited = !!this.isFavorited ? false : JSON.stringify(this.course);
-    if (!this.isFavorited) {
+    if (!!this.isFavorited) {
+      this.isFavorited = false;
       this.favService.removeFavorite(this.favKey());
     } else {
-      this.favService.addFavorite(this.isFavorited);
+      this.isFavorited = JSON.stringify(this.course);
+      this.favService.addFavorite(JSON.stringify(this.course));
     }
   }
 
