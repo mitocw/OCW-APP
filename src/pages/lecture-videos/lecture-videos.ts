@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import $ from 'jqlite';
 import { NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Http } from '@angular/http';
 
 import { LectureVideoSinglePage } from '../lecture-video-single/lecture-video-single';
@@ -17,7 +18,7 @@ export class LectureVideosPage {
   public title: string;
   public navCtrl: NavController;
 
-  constructor(private http: Http, public navParams: NavParams) {
+  constructor(private http: Http, public navParams: NavParams, private sanitizer: DomSanitizer) {
     this.course = navParams.get('course');
     this.title = navParams.get('title');
     this.navCtrl = navParams.get('nav');
@@ -49,4 +50,21 @@ export class LectureVideosPage {
     });
   }
 
+  loadVideoExternal(listing: any) {
+    this.http.get(`https://ocw.mit.edu${listing.href}/`)
+      .subscribe(lecture => {
+        let video = lecture.text()
+          .replace(/(\s\s)|\n|\t/g,'')
+          .replace(/src\=/g, 'mit-src=')
+          .match(/https\:\/\/www.youtube.com\/(v|embed)\/(\w|\-)+/)[0];
+        if (video) {
+          video = video
+                    .replace(/\/(embed|v)\//, '/watch?v=')
+                    .replace("www.youtube", "m.youtube");
+          window.open(encodeURI(video), '_system', 'location=yes');
+        } else {
+          listing.video = false;
+        }
+      });
+  }
 }

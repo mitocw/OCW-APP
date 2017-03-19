@@ -14,3 +14,25 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.css-very-old {
+  display: hidden;
+}
+
+// Compatibility
+html:not(.flexbox) {
+  ion-chip {
+    text-align: center;
+    line-height: inherit;
+  }
+  .responsive-grid {
+    display: block;
+    width: 100%;
+  }
+  .css-new {
+    display: none;
+  }
+  .css-very-old {
+    display: block;
+  }
+}
