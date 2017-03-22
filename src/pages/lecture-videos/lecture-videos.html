@@ -1,12 +1,24 @@
 <ion-content>
-  <ion-card
-    *ngFor='let listing of listings'
-    (click)="loadVideo(listing)">
-    <img [src]='listing.image'/>
-    <ion-card-content>
-      <ion-card-title>
-        {{listing.name}}
-      </ion-card-title>
-    </ion-card-content>
-  </ion-card>
+  <ng-container *ngFor='let listing of listings'> 
+    <ion-card
+      class="css-new"
+      (click)="loadVideo(listing)">
+      <img [src]='listing.image'/>
+      <ion-card-content>
+        <ion-card-title>
+          {{listing.name}}
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+    <ion-card
+      class="css-very-old"
+      (click)="loadVideoExternal(listing)">
+      <img [src]='listing.image'/>
+      <ion-card-content>
+        <ion-card-title>
+          {{listing.name}}
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 </ion-content>
