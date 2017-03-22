@@ -20,7 +20,7 @@
 }
 
 // Compatibility
-html:not(.flexbox) {
+body.old-css-compatible {
   ion-chip {
     text-align: center;
     line-height: inherit;
