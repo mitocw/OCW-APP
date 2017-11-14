@@ -1,6 +1,8 @@
 {
-  "name": "MIT OpenCourseWare",
-  "app_id": "be2c6917",
-  "v2": true,
-  "typescript": true
+  "name": "OpenCourseWare Companion",
+  "app_id": "266ee601",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }
